@@ -3,6 +3,9 @@
 부족 전쟁에서 동전줍기(이하 동줍)을 도와주는 스크립트이다.
 지금은 없어져버린 twfarmreport.com과 비슷한 기능을 제공한다.
 
+* 지원하는 서버: [International (tribalwars.net)](http://tribalwars.net)
+  * static/js/myfarmreport.js에서 파싱하는 부분 때문에 여러 언어 지원 안됨. 추후 수정 예정.
+
 
 ## 개발 환경
 
@@ -40,6 +43,7 @@
 4. nginx 설정하기
 
     * nginx.conf
+       * user를 본인 계정명으로 바꿔준다.
        * worker_processes는 CPU 개수만큼 설정한다.
        * worker_connections는 예상 접속자수*2 이상이면서 worker_processes로 나누어 떨어지도록 설정한다.
        * worker_rlimit_nofile을 worker_connections와 동일하거나 크게 설정한다.
@@ -75,3 +79,19 @@ server {
  아래 명령으로 실행한다.
 
  `uwsgi --socket /tmp/myfarmreport.sock --wsgi-file (your project path)/mwfarmreport/wsgi.py --chmod-socket=664`
+
+## 설정값 바꾸기
+
+* 바꿀 수 없는 설정들
+  * 오직 기마병만 사용하며, 정찰병은 1마리를 항상 넣어준다.
+
+* static / js / myfarmreport.js
+  * server_name = "https://(본인 서버 주소)"
+  * min_res = 약탈할 최소 자원
+  * max_light = 약탈할 때 최대로 쓰는 기마병 수
+
+## 스크립트 등록하기
+
+부족 전쟁 Quick-bar에 아래 스크립트를 등록한다.
+
+`javascript: $.getScript('https://(본인 서버 주소)/static/js/myfarmreport.js'); void(0);`
