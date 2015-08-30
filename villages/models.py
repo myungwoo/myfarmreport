@@ -5,7 +5,7 @@ from django.contrib.auth.models import User, Group
 
 import datetime
 
-_per_hour = [30, 35, 41, 47, 55, 64, 74, 86, 100, 117, 136, 158, 184, 214, 249, 289, 337, 391, 455, 530, 616, 717, 833, 969, 1127, 1311, 1525, 1774, 2063, 2400]
+_per_hour = [5, 30, 35, 41, 47, 55, 64, 74, 86, 100, 117, 136, 158, 184, 214, 249, 289, 337, 391, 455, 530, 616, 717, 833, 969, 1127, 1311, 1525, 1774, 2063, 2400]
 
 class Village(models.Model):
 	name = models.CharField(default='none', max_length=40)
