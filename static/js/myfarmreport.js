@@ -6,10 +6,10 @@ var max_light = 10;
 
 $(function(){
     if (url.search('screen=report') >= 0){
-        if ($('#attack_spy_resources tr:first-child .wood').length){
-            var scouted_wood = $('#attack_spy_resources tr:first-child .wood').parent().html().split('</span>')[1].trim();
-            var scouted_clay = $('#attack_spy_resources tr:first-child .stone').parent().html().split('</span>')[1].trim();
-            var scouted_iron = $('#attack_spy_resources tr:first-child .iron').parent().html().split('</span>')[1].trim();
+        if ($('#attack_spy_resources').length){
+            var scouted_wood = $('#attack_spy_resources tr:first-child .wood').length ? $('#attack_spy_resources tr:first-child .wood').parent().html().split('</span>')[1].trim() : 0;
+            var scouted_clay = $('#attack_spy_resources tr:first-child .stone').length ? $('#attack_spy_resources tr:first-child .stone').parent().html().split('</span>')[1].trim() : 0;
+            var scouted_iron = $('#attack_spy_resources tr:first-child .iron').length ? $('#attack_spy_resources tr:first-child .iron').parent().html().split('</span>')[1].trim() : 0;
 
             var name = $('#attack_info_def .village_anchor a:first-child').html().replace('(', '|').replace(')', '|').split('|')[0].trim();
             var target_x = $('#attack_info_def .village_anchor a:first-child').html().replace('(', '|').replace(')', '|').split('|')[1].trim();
