@@ -85,7 +85,8 @@ def get_next_village(request):
 		return HttpResponse('%s(%s)' % (callback, json.dumps({'msg': 'empty'})))
 	arr.sort()
 	vill = arr[0][1]
-	res = vill.now_wood + vill.now_clay + vill.now_iron
+	dist = arr[0][0] ** 0.5
+	res = vill.now_wood + vill.now_clay + vill.now_iron + int(dist * 10 / 60 * (vill.wood_per_hour + vill.clay_per_hour + vill.iron_per_hour))
 	cnt = res / 80
 
 	return HttpResponse('%s(%s)' % (callback, json.dumps({'msg': 'success', 'x': vill.coord_x, 'y': vill.coord_y, 'cnt': cnt})))
