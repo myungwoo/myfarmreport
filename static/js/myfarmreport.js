@@ -43,7 +43,9 @@ $(function(){
                     clay_level: clay_level,
                     iron_level: iron_level,
                     wall_level: wall_level,
-                    reported_time: reported_time
+                    reported_time: reported_time,
+					username: username,
+					password: password
                 },
                 success: function(rsp){
                     // if (rsp.msg == 'skip') alert('Old report. Skipped');
@@ -79,7 +81,9 @@ $(function(){
                 my_x: my_x,
                 my_y: my_y,
                 min_res: min_res,
-                on_ride: on_ride
+                on_ride: on_ride,
+				username: username,
+				password: password
             },
             success: function(rsp){
                 if (rsp.msg == 'empty'){
@@ -89,11 +93,12 @@ $(function(){
                 if (rsp.msg != 'success') return false;
                 var now_light = parseInt($('#units_entry_all_light').html().replace('(', '').replace(')', ''));
                 var next_light = parseInt(rsp.cnt); // TODO: get info (string? number?)
-                if (next_light > now_light)
-                    next_light = now_light;
-                if (next_light > max_light)
-                    next_light = max_light;
-                // 360|407
+                if ($('input[type="text"][name="light"]').val() == ''){
+                    if (next_light > now_light)
+                        next_light = now_light;
+                    if (next_light > max_light)
+                        next_light = max_light;
+                }
                 var next_x = rsp.x, next_y = rsp.y;
                 $('input[type="text"][name="input"]').val(next_x + '|' + next_y);
                 $('input[type="text"][name="spy"]').val('1');

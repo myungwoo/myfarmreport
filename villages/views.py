@@ -8,6 +8,7 @@ from django.views.static import serve
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import *
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.views.static import serve
@@ -38,10 +39,17 @@ def register_village(request):
 		iron_level = request.GET['iron_level']
 		wall_level = request.GET['wall_level']
 		last_modified = datetime.datetime.strptime(request.GET['reported_time'], '%b %d, %Y %H:%M:%S') + datetime.timedelta(hours=8)
+
+		username = request.GET['username']
+		password = request.GET['password']
+		user = User.objects.get(username=username)
+		if not user.check_password(password):
+			raise Exception()
 	except:
 		return HttpResponse('error')
 
-	village, _ = Village.objects.get_or_create(coord_x=coord_x, coord_y=coord_y)
+
+	village, _ = Village.objects.get_or_create(user=user, coord_x=coord_x, coord_y=coord_y)
 	if village.last_modified > last_modified:
 		return HttpResponse('%s(%s)' % (callback, json.dumps({'msg': 'skip'})))
 	village.last_modified = last_modified
@@ -70,10 +78,16 @@ def get_next_village(request):
 		if on_ride[0] != '[' or on_ride[-1] != ']':
 			return HttpResponse('error')
 		on_ride = set(eval(on_ride))
+
+		username = request.GET['username']
+		password = request.GET['password']
+		user = User.objects.get(username=username)
+		if not user.check_password(password):
+			raise Exception()
 	except:
 		return HttpResponse('error')
 
-	vills = Village.objects.all()
+	vills = Village.objects.filter(user=user)
 	arr = []
 	for vill in vills:
 		res = vill.now_wood + vill.now_clay + vill.now_iron

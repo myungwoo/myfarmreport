@@ -78,7 +78,7 @@ server {
 
  아래 명령으로 실행한다.
 
- `uwsgi --socket /tmp/myfarmreport.sock --wsgi-file (your project path)/mwfarmreport/wsgi.py --chmod-socket=664`
+ `uwsgi --socket /tmp/myfarmreport.sock --wsgi-file (your project path)/myfarmreport/wsgi.py --chmod-socket=664`
 
 ## 설정값 바꾸기
 
@@ -94,4 +94,11 @@ server {
 
 부족 전쟁 Quick-bar에 아래 스크립트를 등록한다.
 
-`javascript: $.getScript('https://(본인 서버 주소)/static/js/myfarmreport.js'); void(0);`
+```
+javascript:
+
+var username = '(your username)';
+var password = '(your password)';
+
+$.getScript('https://(본인 서버 주소)/static/js/myfarmreport.js'); void(0);
+```
