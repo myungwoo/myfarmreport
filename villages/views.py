@@ -90,17 +90,17 @@ def get_next_village(request):
 	vills = Village.objects.filter(user=user)
 	arr = []
 	for vill in vills:
-		res = vill.now_wood + vill.now_clay + vill.now_iron
+		dist = (my_x - vill.coord_x) ** 2 + (my_y - vill.coord_y) ** 2
+		rdist = dist ** 0.5
+		res = vill.now_wood + vill.now_clay + vill.now_iron + int(rdist * 10 / 60 * (vill.wood_per_hour + vill.clay_per_hour + vill.iron_per_hour))
 		if res < min_res or ((vill.coord_x, vill.coord_y) in on_ride):
 			continue
-		dist = (my_x - vill.coord_x) ** 2 + (my_y - vill.coord_y) ** 2
-		arr.append((dist, vill))
+		arr.append((dist, res, vill.coord_x, vill))
 	if not arr:
 		return HttpResponse('%s(%s)' % (callback, json.dumps({'msg': 'empty'})))
 	arr.sort()
-	vill = arr[0][1]
-	dist = arr[0][0] ** 0.5
-	res = vill.now_wood + vill.now_clay + vill.now_iron + int(dist * 10 / 60 * (vill.wood_per_hour + vill.clay_per_hour + vill.iron_per_hour))
+	vill = arr[0][3]
+	res = arr[0][1]
 	cnt = res / 80
 
 	return HttpResponse('%s(%s)' % (callback, json.dumps({'msg': 'success', 'x': vill.coord_x, 'y': vill.coord_y, 'cnt': cnt})))
