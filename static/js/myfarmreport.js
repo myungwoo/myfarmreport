@@ -20,7 +20,7 @@ $(function(){
                 var obj = JSON.parse($('#attack_spy_building_data').val());
                 for (var i=0;i<obj.length;i++){
                     if (obj[i].id == 'wood') wood_level = obj[i].level;
-                    if (obj[i].id == 'clay') clay_level = obj[i].level;
+                    if (obj[i].id == 'stone') clay_level = obj[i].level;
                     if (obj[i].id == 'iron') iron_level = obj[i].level;
                 }
             }else{
