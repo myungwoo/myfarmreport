@@ -44,8 +44,8 @@ $(function(){
                     iron_level: iron_level,
                     wall_level: wall_level,
                     reported_time: reported_time,
-					username: username,
-					password: password
+                    username: username,
+                    password: password
                 },
                 success: function(rsp){
                     // if (rsp.msg == 'skip') alert('Old report. Skipped');
@@ -82,8 +82,8 @@ $(function(){
                 my_y: my_y,
                 min_res: min_res,
                 on_ride: on_ride,
-				username: username,
-				password: password
+                username: username,
+                password: password
             },
             success: function(rsp){
                 if (rsp.msg == 'empty'){

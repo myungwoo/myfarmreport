@@ -48,4 +48,4 @@ class Village(models.Model):
 		return int(self.last_iron + self.time_in_hour * self.iron_per_hour)
 
 	def __unicode__(self):
-		return u'''[%d|%d] %s (%d, %d, %d)'''%(self.coord_x, self.coord_y, self.name, self.now_wood, self.now_clay, self.now_iron)
+		return u'''%s: [%d|%d] %s (%d, %d, %d)'''%(self.user.username, self.coord_x, self.coord_y, self.name, self.now_wood, self.now_clay, self.now_iron)
